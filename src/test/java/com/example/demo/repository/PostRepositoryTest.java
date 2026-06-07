@@ -22,45 +22,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PostRepositoryTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private PostRepository postRepository;
 
     @Test
-    void findByIdAndStatus_로_유저_데이터를_찾아올_수_있다() {
+    void findById_로_게시글_데이터를_찾아올_수_있다() {
         // given
         // when
-        Optional<UserEntity> result = userRepository.findByIdAndStatus(1L, UserStatus.ACTIVE);
+        Optional<PostEntity> result = postRepository.findById(1L);
 
         // then
         assertThat(result.isPresent()).isTrue();
-    }
-
-    @Test
-    void findByIdAndStatus_는_유저_데이터가_없으면_Optional_empty_를_내려준다() {
-        // given
-        // when
-        Optional<UserEntity> result = userRepository.findByIdAndStatus(1L, UserStatus.PENDING);
-
-        // then
-        assertThat(result.isEmpty()).isTrue();
-    }
-
-    @Test
-    void findByEmailAndStatus_로_유저_데이터를_찾아올_수_있다() {
-        // given
-        // when
-        Optional<UserEntity> result = userRepository.findByEmailAndStatus("gihyung.coding@gmail.com", UserStatus.ACTIVE);
-
-        // then
-        assertThat(result.isPresent()).isTrue();
-    }
-
-    @Test
-    void findByEmailAndStatus_는_유저_데이터가_없으면_Optional_empty_를_내려준다() {
-        // given
-        // when
-        Optional<UserEntity> result = userRepository.findByEmailAndStatus("gihyung.coding2@gmail.com", UserStatus.ACTIVE);
-
-        // then
-        assertThat(result.isEmpty()).isTrue();
     }
 }
