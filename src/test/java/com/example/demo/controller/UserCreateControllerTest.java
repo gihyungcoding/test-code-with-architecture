@@ -39,14 +39,6 @@ public class UserCreateControllerTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-//    @PostMapping
-//    public ResponseEntity<UserResponse> createUser(@RequestBody UserCreateDto userCreateDto) {
-//        UserEntity userEntity = userService.create(userCreateDto);
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .body(userController.toResponse(userEntity));
-//    }
-
     @Test
     void 사용자는_유저를_생성할_수_있다() throws Exception {
         // given
