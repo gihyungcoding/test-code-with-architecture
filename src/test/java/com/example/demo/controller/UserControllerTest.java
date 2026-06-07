@@ -66,6 +66,14 @@ public class UserControllerTest {
     }
 
     @Test
+    void 사용자는_유효하지_않은_인증코드로_계정을_활성화_시킬_수_없다() throws Exception {
+
+        mockMvc.perform(get("/api/users/2/verify")
+                        .queryParam("certificationCode", "aaaaaa-aaaa-aaaa-aaaa-aaaaaa3"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
     void 사용자는_내_정보를_불러올_때_개인정보인_주소도_갖고_올_수_있다() throws Exception {
 
         mockMvc.perform(get("/api/users/me")
