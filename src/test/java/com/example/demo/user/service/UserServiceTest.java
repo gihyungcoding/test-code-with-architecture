@@ -2,11 +2,10 @@ package com.example.demo.user.service;
 
 import com.example.demo.common.domain.exception.CertificationCodeNotMatchedException;
 import com.example.demo.common.domain.exception.ResourceNotFoundException;
+import com.example.demo.user.domain.User;
 import com.example.demo.user.domain.UserStatus;
 import com.example.demo.user.domain.UserCreate;
 import com.example.demo.user.domain.UserUpdate;
-import com.example.demo.user.infrastructure.UserEntity;
-import com.example.demo.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +39,10 @@ public class UserServiceTest {
         String email = "gihyung.coding@gmail.com";
 
         // when
-        UserEntity entity = userService.getByEmail(email);
+        User user = userService.getByEmail(email);
 
         // then
-        assertThat(entity.getStatus()).isEqualTo(UserStatus.ACTIVE);
+        assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
     }
 
     @Test
@@ -55,11 +54,11 @@ public class UserServiceTest {
         // when
         // then
         assertThatThrownBy(() -> {
-            UserEntity pendingUser = userService.getByEmail(pendingUserEmail);
+            User pendingUser = userService.getByEmail(pendingUserEmail);
         }).isInstanceOf(ResourceNotFoundException.class);
 
         assertThatThrownBy(() -> {
-            UserEntity inactiveUser = userService.getByEmail(inactiveUserEmail);
+            User inactiveUser = userService.getByEmail(inactiveUserEmail);
         }).isInstanceOf(ResourceNotFoundException.class);
 
     }
@@ -70,7 +69,7 @@ public class UserServiceTest {
         long id = 1L;
 
         // when
-        UserEntity entity = userService.getById(id);
+        User entity = userService.getById(id);
 
         // then
         assertThat(entity.getStatus()).isEqualTo(UserStatus.ACTIVE);
@@ -85,11 +84,11 @@ public class UserServiceTest {
         // when
         // then
         assertThatThrownBy(() -> {
-            UserEntity pendingUser = userService.getById(pendingUserId);
+            User pendingUser = userService.getById(pendingUserId);
         }).isInstanceOf(ResourceNotFoundException.class);
 
         assertThatThrownBy(() -> {
-            UserEntity inactiveUser = userService.getById(inactiveUserId);
+            User inactiveUser = userService.getById(inactiveUserId);
         }).isInstanceOf(ResourceNotFoundException.class);
 
     }
@@ -104,7 +103,7 @@ public class UserServiceTest {
                 .build();
         BDDMockito.doNothing().when(mailSender).send(any(SimpleMailMessage.class));
         // when
-        UserEntity entity = userService.create(dto);
+        User entity = userService.create(dto);
 
         // then
         assertThat(entity.getId()).isNotNull();
@@ -120,7 +119,7 @@ public class UserServiceTest {
                 .address("Seoul2")
                 .build();
         // when
-        UserEntity entity = userService.update(1, dto);
+        User entity = userService.update(1, dto);
 
         // then
         assertThat(entity.getNickname()).isEqualTo("gihyung.coding1_2");
@@ -136,7 +135,7 @@ public class UserServiceTest {
         userService.login(1);
 
         // then
-        UserEntity entity = userService.getById(id);
+        User entity = userService.getById(id);
         // 시간 검증 보완해야함
         assertThat(entity.getLastLoginAt()).isGreaterThan(0L);
     }
@@ -151,7 +150,7 @@ public class UserServiceTest {
         userService.verifyEmail(id, certificationCode);
 
         // then
-        UserEntity entity = userService.getById(id);
+        User entity = userService.getById(id);
         // 시간 검증 보완해야함
         assertThat(entity.getStatus()).isEqualTo(UserStatus.ACTIVE);
     }
