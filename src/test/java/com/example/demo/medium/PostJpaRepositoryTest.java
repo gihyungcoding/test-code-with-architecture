@@ -1,5 +1,7 @@
-package com.example.demo.post.infrastructure;
+package com.example.demo.medium;
 
+import com.example.demo.post.infrastructure.PostEntity;
+import com.example.demo.post.infrastructure.PostJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
