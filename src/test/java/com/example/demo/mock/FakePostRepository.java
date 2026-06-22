@@ -2,8 +2,6 @@ package com.example.demo.mock;
 
 import com.example.demo.post.domain.Post;
 import com.example.demo.post.service.port.PostRepository;
-import com.example.demo.user.domain.User;
-import com.example.demo.user.domain.UserStatus;
 
 import java.util.ArrayList;
 import java.util.List;
