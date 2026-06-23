@@ -36,13 +36,13 @@ public class PostEntity {
     @JoinColumn(name = "user_id")
     private UserEntity writer;
 
-    public static PostEntity fromModel(Post post) {
+    public static PostEntity from(Post post) {
         PostEntity entity = new PostEntity();
         entity.id = post.getId();
         entity.content = post.getContent();
         entity.createdAt = post.getModifiedAt();
         entity.modifiedAt = post.getModifiedAt();
-        entity.writer = UserEntity.fromModel(post.getWriter());
+        entity.writer = UserEntity.from(post.getWriter());
         return entity;
     }
 

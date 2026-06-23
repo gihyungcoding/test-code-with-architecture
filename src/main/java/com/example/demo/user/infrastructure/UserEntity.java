@@ -42,7 +42,7 @@ public class UserEntity {
     @Column(name = "last_login_at")
     private Long lastLoginAt;
 
-    public static UserEntity fromModel(User user) {
+    public static UserEntity from(User user) {
         UserEntity entity = new UserEntity();
         entity.id = user.getId();
         entity.email = user.getEmail();
