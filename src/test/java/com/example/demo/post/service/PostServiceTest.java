@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PostServiceTest {
 
-    private PostService postService;
+    private PostServiceImpl postService;
 
 
     @BeforeEach
@@ -44,7 +44,7 @@ public class PostServiceTest {
                         .writer(user)
                         .build());
 
-        this.postService = PostService.builder()
+        this.postService = PostServiceImpl.builder()
                 .postRepository(postRepository)
                 .userRepository(userRepository)
                 .clockHolder(new TestClockHolder(1L))
